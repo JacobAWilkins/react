@@ -1,27 +1,74 @@
-// import logo from './logo.svg';
 import {useState} from 'react';
+import uuid from 'react-uuid'; // npm install --save react-uuid
+import Todos from './Components/Todos'
 
-import logo from './tek_logo.png';
 import './App.css';
-import Todo from './Components/Todo';
 
 function App() {
 
-  const [todos, setTodos] = useState(["eat","sleep","code","pray","repeat"]);  //sample todo items.  these will need to be changed in your app.  Just filler todos, although they are quite important!
+  const [todos, updateTodos] = useState([
+    {
+      id: '111',
+      title: "Complete exercise 1",
+      isChecked: true
+    },
+    {
+      id: '222',
+      title: "Complete exercise 2",
+      isChecked: false
+    }
+  ]);
+  
+  const [input, updateInput] = useState('');
+  const handleInputChange = e => updateInput(e.target.value);
+
+  function createTodo() {
+    if (input) {
+      updateTodos([...todos,
+        {
+          id: uuid(),
+          title: input,
+          isChecked: false
+        }]);
+      updateInput('');
+    }
+  }
+
+  function deleteTodo(id) {
+    const update = todos.filter(todo => todo.id !== id);
+    updateTodos([...update]);
+  }
+
+  function toggleCheck(id) {
+    const update = todos.map(todo => {
+      return todo.id === id ? {...todo, isChecked: !todo.isChecked} : todo;
+    })
+    updateTodos([...update]);
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div>
-         <br/>
-          <p>Create a Todo List App</p>
-          <Todo item="1"/>
-          <Todo item="2"/>
-          <Todo item="3"/>
-          {todos.map( (t,i) => <Todo key={i} item={t}/>)}
+        <h1>React To-Do List</h1>
+        <div className="input-group">
+          <input 
+            value={input}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="New Task.."
+          />
+          <button
+            onClick={createTodo}>
+              Add New Task
+          </button>
         </div>
-      </header>
+        <br/>
+        <Todos
+          todos={todos}
+          toggleCheck={toggleCheck}
+          deleteTodo={deleteTodo}
+        />
+    </header>
     </div>
   );
 }
