@@ -19,6 +19,7 @@ a {
 
 li {
   list-style: none;
+  padding: 10px;
 }
 
 .App-header {
@@ -34,4 +35,16 @@ li {
 
 .App-link {
   color: #61dafb;
+}
+
+.title {
+  color: black;
+}
+
+.title:hover, .navBar:hover {
+  text-decoration: underline;
+}
+
+.author {
+  font-style: italic;
 }

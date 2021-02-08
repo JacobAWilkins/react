@@ -1,13 +1,12 @@
 import React from 'react';
-import Article from '../Components/Article';
+import Articles from '../Components/Articles';
 
-function Sports() {
+function Sports({ API_KEY, NEWS_URL }) {
+    const req = NEWS_URL + '&category=sports' + API_KEY;
     return (
         <div>
-            <h1>Sports News goes here: </h1>
-            <Article/>
-            <Article/>
-            <Article/>
+            <h1>Sports News: </h1>
+            <Articles req={req}/>
         </div>
     )
 }

@@ -1,14 +1,13 @@
 import React from 'react';
-import Article from '../Components/Article';
+import Articles from '../Components/Articles';
 
-function Headlines() {
+function Headlines({ API_KEY, NEWS_URL }) {
+    const req = NEWS_URL + API_KEY;
     return (
         <div>
-            <h1>Headline News goes here: </h1> 
+            <h1>Headline News: </h1> 
             <p>This should be on the main home page</p>
-            <Article/>
-            <Article/>
-            <Article/>
+            <Articles req={req}/>
         </div>
     )
 }

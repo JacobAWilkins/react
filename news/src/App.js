@@ -2,46 +2,50 @@ import './App.css';
 import NavBar from './Components/NavBar';
 import Headlines from './Views/Headlines';
 import Sports from './Views/Sports';
-import Weather from './Views/Weather';
+import Technology from './Views/Technology';
 import Politics from './Views/Politics';
 import Footer from './Components/Footer';
-import { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default function App() {
+function App() {
 
-  const [news, setNews] = useState([]);
-
-  const NEWS_URL = 'http://newsapi.org/v2/top-headlines?' + 'country=us&' + 'apiKey=1dad88788ed3429592a836fd125189ed';
-  const req = new Request(NEWS_URL);
-  
-  useEffect(() => {    
-    fetch(req)
-      .then(raw => raw.json())
-      .then(res => setNews(res.results));
-  }, [])
+  const API_KEY = '&apiKey=1dad88788ed3429592a836fd125189ed';
+  let NEWS_URL = 'http://newsapi.org/v2/top-headlines?country=us';
 
   return (
     <div className="App">
-      <header className="App-header">
+      <Router>
         <NavBar/>
         <Switch>
-          <br/>
           <Route exact path="/">
-            <Headlines/>
+            <Headlines
+              API_KEY={API_KEY}
+              NEWS_URL={NEWS_URL}
+            />
           </Route>
-          <Route exact path="/">
-            <Sports/>
+          <Route exact path="/sports">
+            <Sports
+              API_KEY={API_KEY}
+              NEWS_URL={NEWS_URL}
+            />
           </Route>
-          <Route exact path="/">
-            <Weather/>
+          <Route exact path="/technology">
+            <Technology
+              API_KEY={API_KEY}
+              NEWS_URL={NEWS_URL} 
+            />
           </Route>
-          <Route exact path="/">
-            <Politics/>
+          <Route exact path="/politics">
+            <Politics
+              API_KEY={API_KEY}
+              NEWS_URL={NEWS_URL}
+            />
           </Route>
         </Switch>
-      </header>
-      <Footer/>
+        <Footer/>
+      </Router>
     </div>
   );
 }
+
+export default App;

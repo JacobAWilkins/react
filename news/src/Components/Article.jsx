@@ -1,18 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-function Article() {
+function Article({ title, source, author, description, url, urlToImage }) {
     return (
         <article>
             <header>
-                <h2>Sample Article</h2>
-                <img src="https://via.placeholder.com/150" alt="placeholder"/>
+                <h2 width="85%"><a className="title" target="_blank" href={url}>{title}</a></h2>
+                <h4>{source}</h4>
+                <a target="_blank" href={url}><img width="85%" src={urlToImage} alt={title}/></a>
             </header>
             <main>
-                <section>
-                    <p>Sample Article Section 1</p>
+                <section className="descr">
+                    <p>{description}</p>
                 </section>
                 <section>
-                    <p>Sample Article Section 2</p>
+                    <p className="author">- {author}</p>
                 </section>
             </main>
         </article>
