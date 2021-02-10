@@ -50,17 +50,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>React To-Do List</h1>
-        <div className="input-group">
-          <input 
-            value={input}
-            onChange={handleInputChange}
-            type="text"
-            placeholder="New Task.."
-          />
-          <button
-            onClick={createTodo}>
-              Add New Task
-          </button>
+        <div>
+          <input type="text" value={input} onChange={handleInputChange} placeholder="New Task.."/>
+          <button onClick={createTodo}>Add New Task</button>
         </div>
         <br/>
         <Todos
