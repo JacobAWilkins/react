@@ -1,13 +1,12 @@
 import React from 'react';
-import Article from '../Components/Article';
+import Articles from '../Components/Articles';
 
-function Politics() {
+function Politics({ API_KEY, NEWS_URL }) {
+    const req = NEWS_URL + '&category=politics' + API_KEY;
     return (
         <div>
-            <h1>Political News goes here: </h1>
-            <Article/>
-            <Article/>
-            <Article/>
+            <h1>Politics News: </h1>
+            <Articles req={req}/>
         </div>
     )
 }
